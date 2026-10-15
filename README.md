@@ -17,11 +17,14 @@
 
 ---
 
-O NexusCore é a base do modpack NexusSMP. É nele que ficam os sistemas próprios do servidor e os
-ajustes que fazem os outros mods do pack funcionarem bem juntos.
+O NexusCore é a base do modpack NexusSMP, um servidor pequeno que montei para jogar com os meus
+amigos. É nele que ficam os sistemas próprios do servidor e os ajustes que fazem os outros mods do
+pack funcionarem bem juntos.
 
-Ele foi pensado para o nosso modpack, mas não depende de nenhum outro mod para abrir: cada
-integração só liga se o mod dela estiver instalado. Os detalhes de cada parte ficam em [`docs/`](docs).
+Não é um projeto feito para crescer nem para rodar em outros servidores: ele existe para a nossa
+diversão e vai mudando conforme as ideias aparecem nas partidas. Mesmo assim, não depende de nenhum
+outro mod para abrir: cada integração só liga se o mod dela estiver instalado. Os detalhes de cada
+parte ficam em [`docs/`](docs).
 
 ## Compilando
 
@@ -38,3 +41,7 @@ O jar sai em `build/libs/`.
 [LGPL-3.0-or-later](LICENSE). Inclui partes de terceiros sob LGPL-3.0: um port do Xander's Sodium
 Options: Continued, os sons das Backrooms do SP-Backrooms Revamped (créditos em
 `src/main/resources/assets/nexuscore/sounds/backrooms/`) e o YetAnotherConfigLib, embutido no jar.
+
+---
+
+<sub>Feito por [Nathanael](https://github.com/Nathanael-Vic), com uma ajuda do [Claude Code](https://claude.com/claude-code). O ícone é arte de um amigo do servidor.</sub>
