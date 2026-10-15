@@ -1,0 +1,29 @@
+Audios das falas dos hologramas.
+
+1) Coloque o arquivo .ogg aqui, por exemplo:
+   assets/nexuscore/sounds/speech/president_intro.ogg
+
+2) Declare ele em assets/nexuscore/sounds.json:
+
+{
+  "speech.president_intro": {
+    "category": "voice",
+    "sounds": [ { "name": "nexuscore:speech/president_intro", "stream": true } ]
+  }
+}
+
+   "stream": true e importante em falas longas (o jogo le o arquivo aos poucos,
+   em vez de carregar tudo na memoria).
+
+3) Amarre o som a gravacao, em jogo:
+   /nexus hologram audio president_intro nexuscore:speech.president_intro
+
+Formato: .ogg (Vorbis), mono para o som vir da direcao do holograma.
+Arquivo estereo o jogo toca sem posicao no mundo.
+
+ATENCAO: OGG Opus nao toca. Audio de WhatsApp e Opus e tambem termina em .ogg,
+entao da para se enganar facil. Arraste o arquivo para cima de
+tools/audio/converter-ogg.cmd (no projeto) que ele sai Vorbis mono, pronto.
+
+O nome do evento (a chave do sounds.json, com ponto) e o que vai no comando;
+o "name" e o caminho do arquivo dentro de sounds/, com barra e sem .ogg.

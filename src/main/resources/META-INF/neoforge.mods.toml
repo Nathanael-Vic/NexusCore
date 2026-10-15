@@ -1,0 +1,69 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "${mod_license}"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "NexusSMP"
+# Icone do mod (arte de um amigo do servidor). Sem desfoque: e pixel art.
+logoFile = "nexuscore_logo.png"
+logoBlur = false
+description = '''
+Mod central do NexusSMP: os sistemas proprios do servidor (mural de quests, radio ao vivo,
+hologramas, Backrooms, reliquias, papagaio de ombro, painel de exploracao, vampiros e magos) e as
+integracoes com outros mods (Vampirism, Iron's Spells, Envelope, Curios, Jade, Simple Voice Chat,
+WaterFrames, Sodium).
+Inclui um port do Xander's Sodium Options: Continued (LGPL-3.0).
+'''
+
+[[mixins]]
+config = "nexuscore.mixins.json"
+
+[[dependencies."${mod_id}"]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.200,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${minecraft_version},1.21.2)"
+ordering = "NONE"
+side = "BOTH"
+
+# Integracoes opcionais. A faixa aqui e aberta de proposito: fora da faixa testada
+# (core/util/CompatRequirements) o modulo desliga com aviso no log, em vez de o jogo recusar abrir.
+[[dependencies."${mod_id}"]]
+modId = "sodium"
+type = "optional"
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies."${mod_id}"]]
+modId = "waterframes"
+type = "optional"
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies."${mod_id}"]]
+modId = "creativecore"
+type = "optional"
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+# Carregar depois do Vampirism: os arquivos em data/vampirism/ deste jar substituem os dele e tiram
+# do mundo o que e jogo de mob (bioma, estruturas, totem e treinador nas vilas, spawn natural).
+# Ver docs/VAMPIRO.md.
+[[dependencies."${mod_id}"]]
+modId = "vampirism"
+type = "optional"
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "BOTH"

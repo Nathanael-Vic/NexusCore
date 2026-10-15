@@ -1,0 +1,13 @@
+{
+  "type": "nexuscore:refuge",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "nexuscore:refuge",
+      "layers": [],
+      "lakes": false,
+      "features": false,
+      "structure_overrides": []
+    }
+  }
+}

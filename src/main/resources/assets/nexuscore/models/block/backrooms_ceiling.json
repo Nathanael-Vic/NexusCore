@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "nexuscore:block/backrooms/ceiling"
+  }
+}

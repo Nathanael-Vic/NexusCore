@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "nexuscore:morph_ring",
+    "nexuscore:refuge_key",
+    "nexuscore:wind_feather",
+    "nexuscore:ember_heart",
+    "nexuscore:astral_mask",
+    "nexuscore:purity_amulet",
+    "nexuscore:unyielding_stone",
+    "nexuscore:bottomless_bag"
+  ]
+}

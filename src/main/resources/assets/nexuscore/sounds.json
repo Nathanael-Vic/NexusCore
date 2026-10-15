@@ -1,0 +1,202 @@
+{
+  "backrooms.ambience": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/ambience",
+        "stream": true
+      }
+    ]
+  },
+  "backrooms.glitch": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/glitch"
+      }
+    ]
+  },
+  "backrooms.light.blink": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/light_blink/light_blink1"
+      },
+      {
+        "name": "nexuscore:backrooms/light_blink/light_blink2"
+      },
+      {
+        "name": "nexuscore:backrooms/light_blink/light_blink3"
+      },
+      {
+        "name": "nexuscore:backrooms/light_blink/light_blink4"
+      },
+      {
+        "name": "nexuscore:backrooms/light_blink/light_blink5"
+      },
+      {
+        "name": "nexuscore:backrooms/light_blink/light_blink6"
+      },
+      {
+        "name": "nexuscore:backrooms/light_blink/light_blink7"
+      },
+      {
+        "name": "nexuscore:backrooms/light_blink/light_blink8"
+      }
+    ]
+  },
+  "backrooms.light.hum": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/hum"
+      }
+    ]
+  },
+  "backrooms.light.on": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/lights_on"
+      }
+    ]
+  },
+  "backrooms.light.out": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/lights_out"
+      }
+    ]
+  },
+  "backrooms.skinwalker.ambience": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/skinwalker/ambience/skinwalker_ambience1"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/ambience/skinwalker_ambience2"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/ambience/skinwalker_ambience3"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/ambience/skinwalker_ambience4"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/ambience/skinwalker_ambience5"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/ambience/skinwalker_ambience6"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/ambience/skinwalker_ambience7"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/ambience/skinwalker_ambience8"
+      }
+    ]
+  },
+  "backrooms.skinwalker.bone_crack": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/skinwalker/reveal/bone_crack"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/reveal/bone_crack_long"
+      }
+    ]
+  },
+  "backrooms.skinwalker.chase": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/skinwalker/chase",
+        "stream": true
+      }
+    ]
+  },
+  "backrooms.skinwalker.jumpscare": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/skinwalker/jumpscare"
+      }
+    ]
+  },
+  "backrooms.skinwalker.notice": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/skinwalker/notice"
+      }
+    ]
+  },
+  "backrooms.skinwalker.release": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/skinwalker/release"
+      }
+    ]
+  },
+  "backrooms.skinwalker.reveal": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/skinwalker/reveal/reveal"
+      }
+    ]
+  },
+  "backrooms.skinwalker.sniff": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/skinwalker/sniff/skinwalker_sniff1"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/sniff/skinwalker_sniff2"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/sniff/skinwalker_sniff3"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/sniff/skinwalker_sniff4"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/sniff/skinwalker_sniff5"
+      }
+    ]
+  },
+  "backrooms.skinwalker.step": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "nexuscore:backrooms/skinwalker/footstep/skinwalker_footstep1"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/footstep/skinwalker_footstep2"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/footstep/skinwalker_footstep3"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/footstep/skinwalker_footstep4"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/footstep/skinwalker_footstep5"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/footstep/skinwalker_footstep6"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/footstep/skinwalker_footstep7"
+      },
+      {
+        "name": "nexuscore:backrooms/skinwalker/footstep/skinwalker_footstep8"
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+.gradle/
+build/
+run/
+out/
+*.iml
+.idea/
+.vscode/
+# classpath gerado para checagem local com javac
+tools/generated/
+backups/
+
+# sistema
+.DS_Store
+Thumbs.db
+*.log

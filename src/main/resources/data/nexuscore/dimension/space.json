@@ -1,0 +1,13 @@
+{
+  "type": "nexuscore:space",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "nexuscore:space",
+      "layers": [],
+      "lakes": false,
+      "features": false,
+      "structure_overrides": []
+    }
+  }
+}

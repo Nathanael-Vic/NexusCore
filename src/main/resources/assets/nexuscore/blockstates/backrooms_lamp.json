@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=true": {
+      "model": "nexuscore:block/backrooms_lamp"
+    },
+    "lit=false": {
+      "model": "nexuscore:block/backrooms_lamp_off"
+    }
+  }
+}

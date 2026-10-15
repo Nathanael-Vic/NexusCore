@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nexuscore:item/ember_heart"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "nexuscore:dormant": 1
+      },
+      "model": "nexuscore:item/ember_heart_dormant"
+    }
+  ]
+}
