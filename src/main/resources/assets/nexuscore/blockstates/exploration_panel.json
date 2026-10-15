@@ -1,0 +1,195 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_up": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_top"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_down": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_bottom"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_up": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_top",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_down": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_bottom",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_up": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_top",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_down": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_bottom",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_up": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_top",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_down": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_bottom",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_left": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "connected_right": "false"
+      },
+      "apply": {
+        "model": "nexuscore:block/exploration_panel_border_right",
+        "y": 270
+      }
+    }
+  ]
+}

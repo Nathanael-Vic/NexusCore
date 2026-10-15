@@ -1,0 +1,13 @@
+Sons das backrooms
+==================
+
+Os audios desta pasta vem do mod SP-Backrooms Revamped (spb-revamped) 1.1.7,
+de SpacePotato e Herr Chaos, publicado sob LGPL-3.0-only.
+https://www.youtube.com/@SpacePotatoee
+
+A licenca completa esta em LICENSE-spb-revamped.txt, nesta mesma pasta.
+LGPL-3.0 permite o uso e a redistribuicao mantendo a licenca e o credito;
+e por isso que os dois arquivos ficam aqui dentro, junto dos audios.
+
+Trocar qualquer um deles por um som proprio e so substituir o arquivo:
+os nomes estao declarados em assets/nexuscore/sounds.json.

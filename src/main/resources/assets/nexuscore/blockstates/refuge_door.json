@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,half=lower": {
+      "model": "nexuscore:block/refuge_door_bottom"
+    },
+    "facing=east,half=upper": {
+      "model": "nexuscore:block/refuge_door_top"
+    },
+    "facing=south,half=lower": {
+      "model": "nexuscore:block/refuge_door_bottom",
+      "y": 90
+    },
+    "facing=south,half=upper": {
+      "model": "nexuscore:block/refuge_door_top",
+      "y": 90
+    },
+    "facing=west,half=lower": {
+      "model": "nexuscore:block/refuge_door_bottom",
+      "y": 180
+    },
+    "facing=west,half=upper": {
+      "model": "nexuscore:block/refuge_door_top",
+      "y": 180
+    },
+    "facing=north,half=lower": {
+      "model": "nexuscore:block/refuge_door_bottom",
+      "y": 270
+    },
+    "facing=north,half=upper": {
+      "model": "nexuscore:block/refuge_door_top",
+      "y": 270
+    }
+  }
+}

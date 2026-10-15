@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "nexuscore:backrooms_wallpaper",
+    "nexuscore:backrooms_baseboard",
+    "nexuscore:backrooms_carpet",
+    "nexuscore:backrooms_ceiling",
+    "nexuscore:backrooms_lamp",
+    "nexuscore:refuge_wall",
+    "nexuscore:refuge_door",
+    "nexuscore:unyielding_stone"
+  ]
+}

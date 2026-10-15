@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nexuscore:item/purity_amulet_0"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "nexuscore:drops": 0.3
+      },
+      "model": "nexuscore:item/purity_amulet_1"
+    },
+    {
+      "predicate": {
+        "nexuscore:drops": 0.6
+      },
+      "model": "nexuscore:item/purity_amulet_2"
+    },
+    {
+      "predicate": {
+        "nexuscore:drops": 0.99
+      },
+      "model": "nexuscore:item/purity_amulet_3"
+    }
+  ]
+}

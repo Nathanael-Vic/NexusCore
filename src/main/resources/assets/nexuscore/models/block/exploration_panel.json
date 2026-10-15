@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "nexuscore:block/panel/background",
+    "side": "nexuscore:block/panel/side",
+    "top": "nexuscore:block/panel/side",
+    "particle": "nexuscore:block/panel/side"
+  }
+}

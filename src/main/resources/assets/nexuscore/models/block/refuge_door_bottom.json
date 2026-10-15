@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "nexuscore:block/refuge_door_bottom",
+    "top": "nexuscore:block/refuge_door_top"
+  }
+}
