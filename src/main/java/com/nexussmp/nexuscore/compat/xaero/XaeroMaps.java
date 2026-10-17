@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Desliga o minimapa e o mapa-mundi do Xaero para quem esta nas backrooms.
+ * Desliga o minimapa e o mapa-mundi do Xaero para quem esta nas backrooms ou fora do corpo.
  *
  * <p>Um mapa acaba com o lugar: o labirinto vira um desenho, a porta de saida vira um ponto, e o
- * corredor sem fim deixa de ser sem fim. Aqui dentro nao existe mapa.
+ * corredor sem fim deixa de ser sem fim. Aqui dentro nao existe mapa. E a alma fora do corpo esta
+ * em outro plano, so olhando: o radar mostraria tudo o que a nevoa esconde.
  *
  * <p>O jeito de fazer isso e do proprio Xaero: os dois mods registram efeitos de status que
  * desligam as suas telas ("Disabled by a status effect!"), justamente para o servidor poder

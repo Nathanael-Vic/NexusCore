@@ -90,13 +90,18 @@ Vestido no pescoço. **Quanto mais perto de morrer, mais forte.**
 ## Máscara Astral
 
 Clique direito: você **sai do corpo**. O corpo fica parado onde estava, de cabeça baixa, com a sua
-skin, o seu nome e o que você vestia. Você vira espectador: atravessa parede, voa, enxerga tudo —
-o próprio corpo e os outros jogadores inclusive. Os outros só veem o corpo.
+skin, o seu nome e o que você vestia. Você vira espectador: voa, ninguém te vê, e você enxerga o
+próprio corpo e os outros jogadores. Os outros só veem o corpo.
 
-- **Preso por um fio:** passou de **32 blocos** do corpo, é puxado de volta. Não abre baú, não
-  entra na cabeça de bicho, não se teletransporta para jogadores pelo menu de espectador.
-- **Não enxerga longe:** uma névoa roxa fecha a visão em uns **22 blocos**, apertando até **12**
-  com o tempo. Atravessar o chão mostra o que está perto, não construções do outro lado do mapa.
+- **Não atravessa nada:** a alma bate em parede, chão e teto como o corpo bateria. Caverna, só
+  entrando pela boca dela.
+- **Sem mapa:** o minimapa e o mapa-mundi do Xaero ficam desligados enquanto você está fora, como
+  nas backrooms.
+- **Preso por um fio:** passou de **32 blocos** do corpo, volta para o último ponto dentro do fio.
+  Não abre baú, não entra na cabeça de bicho, não se teletransporta para jogadores pelo menu de
+  espectador.
+- **Não enxerga longe:** ao sair, o mundo vai sumindo num escuro violeta. Nítido até perto,
+  apagado em uns **40 blocos**, que encolhem até **24** com o tempo.
 - **Voltar:** encoste no próprio corpo, ou aperte **B** (dá para trocar em *Controles → NexusCore*).
   Voltar tonteia — mais quanto mais tempo ficou fora.
 - **Bateram no corpo?** Você é arrancado de volta na hora e leva o golpe com **1,5×** a força.
@@ -172,7 +177,7 @@ item escolhe sozinho.
 - [ ] Chave: porta abre, amigo entra junto, sala erguida, sair volta para cada um; fruta do coro devolve.
 - [ ] Pena: abre no ar, plana mais que elytra, recarga ao pousar, fogos recusados.
 - [ ] Coração: mais forte com pouca vida, cura depois da luta, cinzas ao morrer.
-- [ ] Máscara: corpo visível, fio de 32 blocos, névoa limitando a visão, B volta, encostar volta, golpe no corpo puxa; efeitos escalando; morte pelo limite cai no corpo; relogar no meio.
+- [ ] Máscara: corpo visível, sem atravessar parede, mapas desligados, fio de 32 blocos, névoa escura limitando a visão, B volta, encostar volta, golpe no corpo puxa; efeitos escalando; morte pelo limite cai no corpo; relogar no meio.
 - [ ] Amuleto: veneno absorvido, gotas recarregando, textura mudando.
 - [ ] Pedra: ninguém quebra, dono recolhe, Jade mostra o dono só para admin.
 - [ ] Bolsa: guarda, não perde na morte, não entra em si mesma.

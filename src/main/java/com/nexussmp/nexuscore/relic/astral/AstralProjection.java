@@ -29,7 +29,9 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -37,14 +39,17 @@ import java.util.UUID;
  * A mascara astral: sair do proprio corpo por um tempo.
  *
  * <p><b>Sair.</b> Clique direito com a mascara. O corpo fica onde estava ({@link AstralBody}) e a
- * pessoa vira espectadora: atravessa parede, voa, enxerga tudo — o proprio corpo inclusive. Os outros
- * veem so o corpo parado.
+ * pessoa vira espectadora: voa, ninguem a ve, e ela enxerga o proprio corpo e os outros jogadores.
+ * Os outros veem so o corpo parado.
  *
- * <p><b>O fio.</b> A alma nao vai longe: passou de {@value #LEASH} blocos do corpo, e puxada de
- * volta. Nao abre bau, nao entra na cabeca de bicho, nao se teletransporta para outros jogadores pelo
- * menu de espectador — ela esta em outro plano, so olhando. E nao enxerga longe: uma nevoa fecha a
- * visao em uns vinte blocos, e fecha mais com o tempo ({@code AstralClient}). Atravessar o chao mostra
- * o que esta perto, nao o mapa inteiro.
+ * <p><b>Presa ao mundo.</b> A alma nao atravessa nada: bate em parede, chao e teto como o corpo
+ * bateria ({@link #collides}, usado pelo {@code PlayerAstralMixin}). Caverna, so entrando pela boca
+ * dela. Os mapas do Xaero tambem se fecham enquanto ela esta fora.
+ *
+ * <p><b>O fio.</b> A alma nao vai longe: passou de {@value #LEASH} blocos do corpo, volta para o
+ * ultimo lugar em que ainda estava dentro do fio. Nao abre bau, nao entra na cabeca de bicho, nao se
+ * teletransporta para outros jogadores pelo menu de espectador: ela esta em outro plano, so olhando.
+ * E nao enxerga longe: uma nevoa escura fecha a visao, e fecha mais com o tempo ({@code AstralClient}).
  *
  * <p><b>Voltar.</b> Encostando no proprio corpo, ou pela tecla de voltar (B, por padrao). Voltar
  * tonteia, mais quanto mais tempo ficou fora. Se alguem bate no corpo, a pessoa e arrancada de volta
@@ -76,9 +81,29 @@ public final class AstralProjection {
 
     /** Quem esta fora do corpo agora, para as perguntas rapidas dos mixins (so servidor). */
     private static final Set<UUID> PROJECTING = new HashSet<>();
+    /** O ultimo ponto de cada alma ainda dentro do fio: e para la que o fio puxa. */
+    private static final Map<UUID, Vec3> LAST_INSIDE = new HashMap<>();
+    /** Do lado do cliente: o jogador local esta fora do corpo? O servidor avisa pelo {@code State}. */
+    private static boolean localProjecting;
 
     public static boolean isProjecting(Player player) {
         return !player.level().isClientSide() && PROJECTING.contains(player.getUUID());
+    }
+
+    /**
+     * Esta alma bate nas coisas? O espectador comum atravessa tudo; fora do corpo pela mascara, nao.
+     * Vale dos dois lados, porque quem move o jogador e o cliente: no cliente so o jogador local
+     * importa, no servidor quem esta na lista.
+     */
+    public static boolean collides(Player player) {
+        if (player.level().isClientSide()) {
+            return localProjecting && player.isLocalPlayer();
+        }
+        return PROJECTING.contains(player.getUUID());
+    }
+
+    public static void setLocalProjecting(boolean projecting) {
+        localProjecting = projecting;
     }
 
     /** Esta pessoa ainda esta fora do corpo? (o corpo pergunta, para saber se ainda tem por que existir) */
@@ -144,6 +169,7 @@ public final class AstralProjection {
             AstralSessions.Session session = sessions.get(id);
             if (player == null || session == null) {
                 PROJECTING.remove(id);
+                LAST_INSIDE.remove(id);
                 continue;
             }
             tickOne(player, session);
@@ -165,12 +191,15 @@ public final class AstralProjection {
         long elapsed = level.getGameTime() - session.startedAt();
 
         Vec3 anchor = body.position().add(0.0, 1.0, 0.0);
-        Vec3 offset = player.position().subtract(anchor);
-        if (offset.length() > LEASH) {
-            Vec3 pulled = anchor.add(offset.normalize().scale(LEASH - 1.0));
-            player.teleportTo(level, pulled.x, pulled.y, pulled.z, player.getYRot(), player.getXRot());
+        if (player.position().distanceTo(anchor) > LEASH) {
+            // Volta para onde ja esteve, e nao em linha reta ate o corpo: a linha reta pode cruzar
+            // a terra, e a alma acabaria enfiada dentro dela.
+            Vec3 back = LAST_INSIDE.getOrDefault(player.getUUID(), new Vec3(session.x(), session.y(), session.z()));
+            player.teleportTo(level, back.x, back.y, back.z, player.getYRot(), player.getXRot());
             player.displayClientMessage(Component.translatable("nexuscore.relic.astral_mask.leash")
                     .withStyle(ChatFormatting.DARK_PURPLE), true);
+        } else {
+            LAST_INSIDE.put(player.getUUID(), player.position());
         }
 
         if (elapsed > RETURN_GRACE_TICKS && player.getBoundingBox().intersects(body.getBoundingBox())) {
@@ -193,6 +222,7 @@ public final class AstralProjection {
     /** Volta para o corpo: posicao, modo de jogo, e a tontura. */
     static void end(ServerPlayer player) {
         PROJECTING.remove(player.getUUID());
+        LAST_INSIDE.remove(player.getUUID());
         AstralSessions.Session session = AstralSessions.get(player.server).remove(player.getUUID());
         if (session == null) {
             return;
@@ -229,6 +259,7 @@ public final class AstralProjection {
     /** Sem devolver nada: o modo de jogo ja foi mudado por fora. So apaga o corpo e o registro. */
     private static void forget(ServerPlayer player) {
         PROJECTING.remove(player.getUUID());
+        LAST_INSIDE.remove(player.getUUID());
         AstralSessions.Session session = AstralSessions.get(player.server).remove(player.getUUID());
         if (session != null) {
             ServerLevel level = player.server.getLevel(session.dimension());
@@ -295,6 +326,7 @@ public final class AstralProjection {
 
     public static void clear() {
         PROJECTING.clear();
+        LAST_INSIDE.clear();
     }
 
     private AstralProjection() {}

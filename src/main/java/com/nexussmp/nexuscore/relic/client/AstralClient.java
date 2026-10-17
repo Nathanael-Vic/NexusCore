@@ -5,6 +5,7 @@ import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.nexussmp.nexuscore.core.client.ScreenNoise;
 import com.nexussmp.nexuscore.relic.astral.AstralPayloads;
+import com.nexussmp.nexuscore.relic.astral.AstralProjection;
 import net.minecraft.Util;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -67,8 +68,12 @@ public final class AstralClient {
     /** Quanto tempo o aviso de como voltar fica na tela. */
     private static final int HINT_TICKS = 100;
     /** Ate onde a alma enxerga ao sair do corpo, e ate onde no limite, em blocos. */
-    private static final float SIGHT_FAR = 22.0F;
-    private static final float SIGHT_NEAR = 12.0F;
+    private static final float SIGHT_FAR = 40.0F;
+    private static final float SIGHT_NEAR = 24.0F;
+    /** Ate que fracao da visao tudo fica nitido; dali para frente vai escurecendo. */
+    private static final float SIGHT_CLEAR = 0.3F;
+    /** Quanto tempo a nevoa leva para fechar depois de sair do corpo. */
+    private static final int FOG_IN_TICKS = 40;
 
     private static boolean active;
     private static int ticks;
@@ -84,17 +89,21 @@ public final class AstralClient {
     private record Whisper(int key, float x, float y, float scale, int born, int life) {}
 
     public static void apply(AstralPayloads.State state) {
+        stop();
         if (state.active()) {
-            stop();
             active = true;
             maxTicks = Math.max(1, state.maxTicks());
-        } else {
-            stop();
+            AstralProjection.setLocalProjecting(true);
         }
+    }
+
+    public static boolean active() {
+        return active;
     }
 
     public static void stop() {
         active = false;
+        AstralProjection.setLocalProjecting(false);
         ticks = 0;
         shrieked = false;
         cursed = false;
@@ -226,31 +235,43 @@ public final class AstralClient {
     }
 
     /**
-     * A alma nao enxerga longe: uma nevoa roxa fecha a visao em {@value #SIGHT_FAR} blocos, e aperta
-     * ate {@value #SIGHT_NEAR} conforme a loucura cresce. E o que impede de atravessar o chao e varrer
-     * o mapa atras de construcao: da para ver o que esta perto, nao o que esta longe. Vale para tudo —
-     * terreno, agua, ceu e criaturas —, porque e a propria nevoa do jogo.
+     * A alma nao enxerga longe: o mundo vai sumindo num escuro, nitido ate perto e apagado em
+     * {@value #SIGHT_FAR} blocos, que encolhem ate {@value #SIGHT_NEAR} conforme a loucura cresce. Da
+     * para ver quem esta por perto, nao varrer o mapa atras de construcao. Vale para tudo (terreno,
+     * agua, ceu e criaturas), porque e a propria nevoa do jogo; ao sair do corpo, ela fecha devagar.
      */
     static void onRenderFog(ViewportEvent.RenderFog event) {
         if (!active) {
             return;
         }
-        float madness = Mth.clamp(madness((float) event.getPartialTick()), 0.0F, 1.0F);
-        float far = Mth.lerp(madness, SIGHT_FAR, SIGHT_NEAR);
-        event.setNearPlaneDistance(Math.min(event.getNearPlaneDistance(), far * 0.2F));
-        event.setFarPlaneDistance(Math.min(event.getFarPlaneDistance(), far));
+        float partial = (float) event.getPartialTick();
+        float closing = fogClosing(partial);
+        float madness = Mth.clamp(madness(partial), 0.0F, 1.0F);
+        float sight = Math.min(event.getFarPlaneDistance(), Mth.lerp(madness, SIGHT_FAR, SIGHT_NEAR));
+        float far = Mth.lerp(closing, event.getFarPlaneDistance(), sight);
+        float near = Mth.lerp(closing, event.getNearPlaneDistance(), sight * SIGHT_CLEAR);
+        event.setNearPlaneDistance(Math.min(near, far));
+        event.setFarPlaneDistance(far);
         event.setFogShape(FogShape.SPHERE);
         // Sem cancelar, o jogo ignora as distancias novas.
         event.setCanceled(true);
     }
 
-    /** A nevoa e roxa-escura, quase preta: a cor do "outro plano". */
+    /** O escuro tem um fundo violeta, quase preto: a cor do "outro plano". O ceu some junto. */
     static void onFogColor(ViewportEvent.ComputeFogColor event) {
-        if (active) {
-            event.setRed(0.07F);
-            event.setGreen(0.02F);
-            event.setBlue(0.11F);
+        if (!active) {
+            return;
         }
+        float closing = fogClosing((float) event.getPartialTick());
+        event.setRed(Mth.lerp(closing, event.getRed(), 0.025F));
+        event.setGreen(Mth.lerp(closing, event.getGreen(), 0.012F));
+        event.setBlue(Mth.lerp(closing, event.getBlue(), 0.045F));
+    }
+
+    /** De 0 (acabou de sair do corpo) a 1 (a nevoa fechou), com entrada e saida suaves. */
+    private static float fogClosing(float partialTick) {
+        float t = Mth.clamp((ticks + partialTick) / FOG_IN_TICKS, 0.0F, 1.0F);
+        return t * t * (3.0F - 2.0F * t);
     }
 
     /** O campo de visao respira — e no fim, puxa e solta. */
