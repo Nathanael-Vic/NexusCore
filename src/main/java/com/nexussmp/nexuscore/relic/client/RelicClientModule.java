@@ -1,6 +1,7 @@
 package com.nexussmp.nexuscore.relic.client;
 
 import com.nexussmp.nexuscore.NexusCore;
+import com.nexussmp.nexuscore.compat.xaero.XaeroMapsClient;
 import com.nexussmp.nexuscore.core.module.ModuleIds;
 import com.nexussmp.nexuscore.core.module.NexusModule;
 import com.nexussmp.nexuscore.core.registry.NexusRegistries;
@@ -21,7 +22,8 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 /**
  * Parte de cliente das reliquias: o desenho do corpo astral, as texturas que mudam (o coracao em
- * cinzas, as gotas do amuleto), a tecla de voltar ao corpo, o voo da pena e a loucura na tela.
+ * cinzas, as gotas do amuleto), a tecla de voltar ao corpo, o voo da pena, a loucura na tela e os
+ * mapas fechados enquanto a alma esta fora.
  */
 public final class RelicClientModule implements NexusModule {
 
@@ -57,5 +59,7 @@ public final class RelicClientModule implements NexusModule {
         game.addListener(ViewportEvent.RenderFog.class, AstralClient::onRenderFog);
         game.addListener(ViewportEvent.ComputeFogColor.class, AstralClient::onFogColor);
         game.addListener(ClientPlayerNetworkEvent.LoggingOut.class, event -> AstralClient.stop());
+        // Fora do corpo, sem minimapa nem mapa-mundi: o radar mostraria tudo o que a nevoa esconde.
+        XaeroMapsClient.blockWhen(player -> AstralClient.active());
     }
 }

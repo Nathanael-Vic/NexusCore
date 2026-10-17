@@ -1,5 +1,6 @@
 package com.nexussmp.nexuscore.backrooms.client;
 
+import com.nexussmp.nexuscore.backrooms.BackroomsDimensions;
 import com.nexussmp.nexuscore.backrooms.client.render.SkinwalkerRenderer;
 import com.nexussmp.nexuscore.compat.xaero.XaeroMapsClient;
 import com.nexussmp.nexuscore.core.module.ModuleIds;
@@ -40,8 +41,7 @@ public final class BackroomsClientModule implements NexusModule {
         game.addListener(ClientPlayerNetworkEvent.LoggingOut.class, event -> BackroomsAudio.stop());
 
         // O Xaero quase sempre e so de cliente: o bloqueio dos mapas precisa acontecer aqui.
-        game.addListener(PlayerTickEvent.Post.class, XaeroMapsClient::onPlayerTick);
-        game.addListener(ClientPlayerNetworkEvent.LoggingOut.class, event -> XaeroMapsClient.reset());
+        XaeroMapsClient.blockWhen(player -> player.level().dimension().equals(BackroomsDimensions.BACKROOMS));
 
         modBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event ->
                 event.registerEntityRenderer(NexusRegistries.SKINWALKER.get(), SkinwalkerRenderer::new));
