@@ -68,10 +68,10 @@ public final class AstralClient {
     /** Quanto tempo o aviso de como voltar fica na tela. */
     private static final int HINT_TICKS = 100;
     /** Ate onde a alma enxerga ao sair do corpo, e ate onde no limite, em blocos. */
-    private static final float SIGHT_FAR = 40.0F;
-    private static final float SIGHT_NEAR = 24.0F;
-    /** Ate que fracao da visao tudo fica nitido; dali para frente vai escurecendo. */
-    private static final float SIGHT_CLEAR = 0.3F;
+    private static final float SIGHT_FAR = 28.0F;
+    private static final float SIGHT_NEAR = 16.0F;
+    /** Onde o escuro comeca, em fracao da visao: perto, para a nevoa ser densa. */
+    private static final float SIGHT_CLEAR = 0.1F;
     /** Quanto tempo a nevoa leva para fechar depois de sair do corpo. */
     private static final int FOG_IN_TICKS = 40;
 
@@ -235,26 +235,27 @@ public final class AstralClient {
     }
 
     /**
-     * A alma nao enxerga longe: o mundo vai sumindo num escuro, nitido ate perto e apagado em
-     * {@value #SIGHT_FAR} blocos, que encolhem ate {@value #SIGHT_NEAR} conforme a loucura cresce. Da
-     * para ver quem esta por perto, nao varrer o mapa atras de construcao. Vale para tudo (terreno,
-     * agua, ceu e criaturas), porque e a propria nevoa do jogo; ao sair do corpo, ela fecha devagar.
+     * A alma nao enxerga longe: o mundo vai sumindo num escuro forte, que comeca logo a frente e
+     * apaga tudo em {@value #SIGHT_FAR} blocos, encolhendo ate {@value #SIGHT_NEAR} conforme a loucura
+     * cresce. A borda dos chunks nunca aparece. Vale para tudo (terreno, agua, ceu, nuvens e
+     * criaturas), porque e a propria nevoa do jogo; ao sair do corpo, ela fecha devagar.
+     *
+     * <p>Chamado no fim de {@code FogRenderer.setupFog} ({@code FogRendererAstralMixin}), depois de
+     * qualquer mod que mexa na nevoa, por isso le e escreve direto no {@link RenderSystem}.
      */
-    static void onRenderFog(ViewportEvent.RenderFog event) {
+    public static void applyFog(float renderDistance, float partialTick) {
         if (!active) {
             return;
         }
-        float partial = (float) event.getPartialTick();
-        float closing = fogClosing(partial);
-        float madness = Mth.clamp(madness(partial), 0.0F, 1.0F);
-        float sight = Math.min(event.getFarPlaneDistance(), Mth.lerp(madness, SIGHT_FAR, SIGHT_NEAR));
-        float far = Mth.lerp(closing, event.getFarPlaneDistance(), sight);
-        float near = Mth.lerp(closing, event.getNearPlaneDistance(), sight * SIGHT_CLEAR);
-        event.setNearPlaneDistance(Math.min(near, far));
-        event.setFarPlaneDistance(far);
-        event.setFogShape(FogShape.SPHERE);
-        // Sem cancelar, o jogo ignora as distancias novas.
-        event.setCanceled(true);
+        float closing = fogClosing(partialTick);
+        float madness = Mth.clamp(madness(partialTick), 0.0F, 1.0F);
+        float sight = Math.min(renderDistance, Mth.lerp(madness, SIGHT_FAR, SIGHT_NEAR));
+        // Com a nevoa desligada por outro mod, o fim dela pode vir enorme: a borda e o limite real.
+        float fromEnd = Math.min(RenderSystem.getShaderFogEnd(), renderDistance);
+        float fromStart = Math.min(RenderSystem.getShaderFogStart(), fromEnd);
+        RenderSystem.setShaderFogStart(Mth.lerp(closing, fromStart, sight * SIGHT_CLEAR));
+        RenderSystem.setShaderFogEnd(Mth.lerp(closing, fromEnd, sight));
+        RenderSystem.setShaderFogShape(FogShape.SPHERE);
     }
 
     /** O escuro tem um fundo violeta, quase preto: a cor do "outro plano". O ceu some junto. */
@@ -263,9 +264,9 @@ public final class AstralClient {
             return;
         }
         float closing = fogClosing((float) event.getPartialTick());
-        event.setRed(Mth.lerp(closing, event.getRed(), 0.025F));
-        event.setGreen(Mth.lerp(closing, event.getGreen(), 0.012F));
-        event.setBlue(Mth.lerp(closing, event.getBlue(), 0.045F));
+        event.setRed(Mth.lerp(closing, event.getRed(), 0.02F));
+        event.setGreen(Mth.lerp(closing, event.getGreen(), 0.01F));
+        event.setBlue(Mth.lerp(closing, event.getBlue(), 0.035F));
     }
 
     /** De 0 (acabou de sair do corpo) a 1 (a nevoa fechou), com entrada e saida suaves. */

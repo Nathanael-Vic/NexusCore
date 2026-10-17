@@ -11,6 +11,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -23,6 +24,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -42,9 +44,11 @@ import java.util.UUID;
  * pessoa vira espectadora: voa, ninguem a ve, e ela enxerga o proprio corpo e os outros jogadores.
  * Os outros veem so o corpo parado.
  *
- * <p><b>Presa ao mundo.</b> A alma nao atravessa nada: bate em parede, chao e teto como o corpo
- * bateria ({@link #collides}, usado pelo {@code PlayerAstralMixin}). Caverna, so entrando pela boca
- * dela. Os mapas do Xaero tambem se fecham enquanto ela esta fora.
+ * <p><b>Atravessa o que e construido, nao a terra.</b> Parede de casa, porta, vidro, tronco: a alma
+ * passa. Pedra, terra, areia, minerio ({@link #SOLID_TO_SOUL}): bate, como o corpo bateria. Da para
+ * espiar dentro de uma base, nao descer pelo chao ate as cavernas; caverna, so entrando pela boca
+ * dela. Quem faz isso sao o {@code PlayerAstralMixin} e o {@code BlockStateAstralMixin}, perguntando
+ * a {@link #collides}. Os mapas do Xaero tambem se fecham enquanto ela esta fora.
  *
  * <p><b>O fio.</b> A alma nao vai longe: passou de {@value #LEASH} blocos do corpo, volta para o
  * ultimo lugar em que ainda estava dentro do fio. Nao abre bau, nao entra na cabeca de bicho, nao se
@@ -77,6 +81,9 @@ public final class AstralProjection {
     /** Quem apanhou ha menos que isto nao consegue se concentrar para sair. */
     private static final int CALM_TICKS = 5 * 20;
 
+    /** O chao natural, que a alma nao atravessa. O resto (o que da para construir) ela atravessa. */
+    public static final TagKey<Block> SOLID_TO_SOUL = TagKey.create(Registries.BLOCK, NexusCore.id("astral_solid"));
+
     public static final ResourceKey<DamageType> LOST = ResourceKey.create(Registries.DAMAGE_TYPE, NexusCore.id("lost_in_astral"));
 
     /** Quem esta fora do corpo agora, para as perguntas rapidas dos mixins (so servidor). */
@@ -91,7 +98,7 @@ public final class AstralProjection {
     }
 
     /**
-     * Esta alma bate nas coisas? O espectador comum atravessa tudo; fora do corpo pela mascara, nao.
+     * Esta alma bate na terra? O espectador comum atravessa tudo; fora do corpo pela mascara, nao.
      * Vale dos dois lados, porque quem move o jogador e o cliente: no cliente so o jogador local
      * importa, no servidor quem esta na lista.
      */

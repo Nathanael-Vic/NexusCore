@@ -1,0 +1,30 @@
+{
+  "values": [
+    "#minecraft:base_stone_overworld",
+    "#minecraft:base_stone_nether",
+    "#minecraft:dirt",
+    "#minecraft:sand",
+    "minecraft:gravel",
+    "minecraft:clay",
+    "minecraft:sandstone",
+    "minecraft:red_sandstone",
+    "minecraft:terracotta",
+    "minecraft:calcite",
+    "minecraft:dripstone_block",
+    "minecraft:smooth_basalt",
+    "minecraft:budding_amethyst",
+    "minecraft:magma_block",
+    "minecraft:soul_sand",
+    "minecraft:soul_soil",
+    "#minecraft:nylium",
+    "minecraft:end_stone",
+    "minecraft:bedrock",
+    "minecraft:sculk",
+    "minecraft:infested_stone",
+    "minecraft:infested_deepslate",
+    {
+      "id": "#c:ores",
+      "required": false
+    }
+  ]
+}

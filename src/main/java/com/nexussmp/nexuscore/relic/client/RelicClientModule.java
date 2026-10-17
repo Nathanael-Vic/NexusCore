@@ -56,7 +56,6 @@ public final class RelicClientModule implements NexusModule {
         game.addListener(RenderGuiEvent.Post.class, AstralClient::onRenderGui);
         game.addListener(ViewportEvent.ComputeCameraAngles.class, AstralClient::onCameraAngles);
         game.addListener(ViewportEvent.ComputeFov.class, AstralClient::onFov);
-        game.addListener(ViewportEvent.RenderFog.class, AstralClient::onRenderFog);
         game.addListener(ViewportEvent.ComputeFogColor.class, AstralClient::onFogColor);
         game.addListener(ClientPlayerNetworkEvent.LoggingOut.class, event -> AstralClient.stop());
         // Fora do corpo, sem minimapa nem mapa-mundi: o radar mostraria tudo o que a nevoa esconde.

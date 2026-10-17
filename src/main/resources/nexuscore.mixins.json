@@ -19,6 +19,7 @@
     "relic.LivingEntityFallFlyingMixin",
     "relic.PlayerFallFlyingMixin",
     "relic.PlayerAstralMixin",
+    "relic.BlockStateAstralMixin",
     "relic.ServerPlayerAstralMixin",
     "relic.ServerGamePacketListenerAstralMixin"
   ],
@@ -37,6 +38,7 @@
     "backrooms.CameraMixin",
     "options.OptionsHeaderMixin",
     "relic.LocalPlayerFallFlyingMixin",
+    "relic.FogRendererAstralMixin",
     "morph.EntityRendererAccessor",
     "morph.WalkAnimationStateAccessor",
     "quest.AbstractContainerScreenAccessor",
