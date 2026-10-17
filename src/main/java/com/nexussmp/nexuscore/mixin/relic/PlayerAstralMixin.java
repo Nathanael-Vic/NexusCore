@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * O espectador comum atravessa tudo: o jogo liga {@code noPhysics} no comeco de cada tick de quem
- * esta no espectador. Fora do corpo pela mascara, a alma continua voando e invisivel, mas bate em
- * parede e chao: logo depois de o jogo ligar, desligamos de novo.
+ * esta no espectador. Fora do corpo pela mascara, desligamos de novo logo em seguida: a alma volta a
+ * ter colisao, e o {@code BlockStateAstralMixin} decide em que ela bate (so na terra).
  */
 @Mixin(Player.class)
 public abstract class PlayerAstralMixin {
