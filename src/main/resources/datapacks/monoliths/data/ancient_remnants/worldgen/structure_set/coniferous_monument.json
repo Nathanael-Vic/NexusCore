@@ -1,0 +1,17 @@
+{
+  "placement": {
+    "type": "nexuscore:lone_monolith",
+    "salt": 27780361,
+    "slot": 5,
+    "min_distance": 2000,
+    "max_distance": 5000,
+    "core_radius": 60,
+    "preferred_biomes": "#ancient_remnants:has_structure/coniferous_monument"
+  },
+  "structures": [
+    {
+      "structure": "ancient_remnants:coniferous_monument",
+      "weight": 1
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "placement": {
+    "type": "nexuscore:lone_monolith",
+    "salt": 69052819,
+    "slot": 4,
+    "min_distance": 2000,
+    "max_distance": 5000,
+    "core_radius": 60,
+    "preferred_biomes": "#ancient_remnants:has_structure/oakwood_monument"
+  },
+  "structures": [
+    {
+      "structure": "ancient_remnants:oakwood_monument",
+      "weight": 1
+    }
+  ]
+}

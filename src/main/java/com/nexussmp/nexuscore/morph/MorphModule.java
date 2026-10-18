@@ -2,7 +2,6 @@ package com.nexussmp.nexuscore.morph;
 
 import com.nexussmp.nexuscore.core.module.ModuleIds;
 import com.nexussmp.nexuscore.core.module.NexusModule;
-import com.nexussmp.nexuscore.core.registry.NexusRegistries;
 import com.nexussmp.nexuscore.core.util.ModRequirement;
 import com.nexussmp.nexuscore.morph.client.MorphClient;
 import net.neoforged.bus.api.IEventBus;
@@ -18,7 +17,6 @@ import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.List;
 
@@ -55,8 +53,7 @@ public final class MorphModule implements NexusModule {
         });
 
         // Clique direito com o anel na mao veste o anel, como armadura (o Curios faz a troca).
-        modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(() ->
-                CuriosApi.registerCurio(NexusRegistries.MORPH_RING.get(), new MorphRingCurio())));
+        modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(MorphCurios::register));
 
         IEventBus game = NeoForge.EVENT_BUS;
         game.addListener(AttackEntityEvent.class, MorphCapture::onAttack);

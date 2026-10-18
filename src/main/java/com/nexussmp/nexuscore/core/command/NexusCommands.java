@@ -4,6 +4,7 @@ import com.nexussmp.nexuscore.backrooms.command.BackroomsCommands;
 import com.nexussmp.nexuscore.display.command.PanelCommands;
 import com.nexussmp.nexuscore.hologram.command.HologramCommands;
 import com.nexussmp.nexuscore.magic.command.MagicCommands;
+import com.nexussmp.nexuscore.monolith.MonolithCommands;
 import com.nexussmp.nexuscore.parrot.command.ParrotCommands;
 import com.nexussmp.nexuscore.quest.command.QuestCommands;
 import com.nexussmp.nexuscore.radio.command.RadioCommands;
@@ -25,7 +26,8 @@ public final class NexusCommands {
                 .then(RadioCommands.build())
                 .then(VampireCommands.build())
                 .then(MagicCommands.build())
-                .then(ParrotCommands.build()));
+                .then(ParrotCommands.build())
+                .then(MonolithCommands.build()));
     }
 
     private NexusCommands() {}

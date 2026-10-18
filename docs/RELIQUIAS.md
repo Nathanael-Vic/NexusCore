@@ -104,7 +104,7 @@ próprio corpo e os outros jogadores. Os outros só veem o corpo.
   espectador.
 - **Não enxerga longe:** ao sair, uma névoa escura, quase preta, fecha a visão: começa logo à
   frente e apaga tudo em uns **28 blocos**, que encolhem até **16** com o tempo. A borda dos chunks
-  nunca aparece, nem com a névoa desligada no Sodium Extra.
+  nunca aparece, nem com a névoa desligada no Sodium Extra nem com o Cirrus.
 - **Voltar:** encoste no próprio corpo, ou aperte **B** (dá para trocar em *Controles → NexusCore*).
   Voltar tonteia — mais quanto mais tempo ficou fora.
 - **Bateram no corpo?** Você é arrancado de volta na hora e leva o golpe com **1,5×** a força.

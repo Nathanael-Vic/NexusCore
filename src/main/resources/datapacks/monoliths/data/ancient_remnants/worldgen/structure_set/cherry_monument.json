@@ -1,0 +1,17 @@
+{
+  "placement": {
+    "type": "nexuscore:lone_monolith",
+    "salt": 40617733,
+    "slot": 3,
+    "min_distance": 2000,
+    "max_distance": 5000,
+    "core_radius": 60,
+    "preferred_biomes": "#ancient_remnants:has_structure/cherry_monument"
+  },
+  "structures": [
+    {
+      "structure": "ancient_remnants:cherry_monument",
+      "weight": 1
+    }
+  ]
+}

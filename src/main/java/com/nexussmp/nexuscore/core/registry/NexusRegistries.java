@@ -289,6 +289,19 @@ public final class NexusRegistries {
                     .pushReaction(PushReaction.BLOCK)
                     .sound(SoundType.DEEPSLATE_BRICKS));
 
+    /**
+     * O bloco "sem textura" que aparece em volta dos monolitos. Ninguem quebra, nada empurra, e de
+     * proposito nao tem nome traduzido: quem olha ve a chave crua, como num jogo quebrado. Sem item.
+     */
+    public static final DeferredBlock<Block> NULL_BLOCK = BLOCKS.registerSimpleBlock("null",
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_MAGENTA)
+                    .strength(-1.0F, 3600000.0F)
+                    .noLootTable()
+                    .pushReaction(PushReaction.BLOCK)
+                    .isValidSpawn((state, level, pos, type) -> false)
+                    .sound(SoundType.STONE));
+
     public static final DeferredItem<UnyieldingStoneItem> UNYIELDING_STONE_ITEM = ITEMS.registerItem("unyielding_stone",
             properties -> new UnyieldingStoneItem(UNYIELDING_STONE.get(), properties), RelicItem.properties());
 

@@ -1,0 +1,17 @@
+{
+  "placement": {
+    "type": "nexuscore:lone_monolith",
+    "salt": 51993407,
+    "slot": 1,
+    "min_distance": 2000,
+    "max_distance": 5000,
+    "core_radius": 32,
+    "preferred_biomes": "#ancient_remnants:has_structure/warrior_monolith"
+  },
+  "structures": [
+    {
+      "structure": "ancient_remnants:warrior_monolith",
+      "weight": 1
+    }
+  ]
+}

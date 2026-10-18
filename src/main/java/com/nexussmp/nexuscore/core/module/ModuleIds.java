@@ -21,10 +21,12 @@ public final class ModuleIds {
     public static final String MAGIC = "magic";
     public static final String PARROT = "parrot";
     public static final String RELIC = "relic";
+    public static final String MONOLITH = "monolith";
 
     public static final List<String> ALL =
             List.of(COMPAT_SODIUM, COMPAT_WATERFRAMES, COMPAT_OPTIONS, COMPAT_COSMETICARMOR, COMPAT_ENVELOPE,
-                    STATS, DISPLAY, SPACE, HOLOGRAM, QUEST, BACKROOMS, RADIO, VAMPIRE, MORPH, MAGIC, PARROT, RELIC);
+                    STATS, DISPLAY, SPACE, HOLOGRAM, QUEST, BACKROOMS, RADIO, VAMPIRE, MORPH, MAGIC, PARROT, RELIC,
+                    MONOLITH);
 
     private ModuleIds() {}
 }

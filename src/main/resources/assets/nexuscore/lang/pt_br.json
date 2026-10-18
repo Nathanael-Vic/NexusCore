@@ -426,6 +426,7 @@
   "nexuscore.relic.astral_mask.whisper.11": "esse corpo não é seu",
   "nexuscore.relic.astral_mask.whisper.12": "respira",
   "nexuscore.relic.astral_mask.whisper.13": "abra os olhos",
+  "death.attack.nexuscore.fell_through_world": "%1$s caiu por um buraco no mundo",
   "death.attack.nexuscore.lost_in_astral": "%1$s se perdeu fora do próprio corpo",
   "nexuscore.relic.purity_amulet.tooltip": "Como berloque: cada gota bebe um efeito ruim antes de ele pegar.",
   "nexuscore.relic.purity_amulet.drops": "Gotas: %1$s/%2$s",

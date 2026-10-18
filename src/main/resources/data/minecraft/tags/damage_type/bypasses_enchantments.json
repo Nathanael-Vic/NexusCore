@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "nexuscore:lost_in_astral"
+    "nexuscore:lost_in_astral",
+    "nexuscore:fell_through_world"
   ]
 }
