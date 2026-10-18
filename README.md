@@ -11,7 +11,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Minecraft-1.21.1-62B47A?style=flat-square" alt="Minecraft 1.21.1">
   <img src="https://img.shields.io/badge/NeoForge-21.1-E68C37?style=flat-square" alt="NeoForge 21.1">
-  <img src="https://img.shields.io/badge/vers%C3%A3o-0.1.2%20beta-8C6BC8?style=flat-square" alt="Versão 0.1.2 beta">
+  <img src="https://img.shields.io/badge/vers%C3%A3o-0.1.3%20beta-8C6BC8?style=flat-square" alt="Versão 0.1.3 beta">
   <img src="https://img.shields.io/badge/licen%C3%A7a-LGPL--3.0-3B6FB6?style=flat-square" alt="Licença LGPL-3.0">
 </p>
 
