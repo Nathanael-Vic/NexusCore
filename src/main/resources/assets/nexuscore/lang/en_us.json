@@ -426,6 +426,7 @@
   "nexuscore.relic.astral_mask.whisper.11": "that body is not yours",
   "nexuscore.relic.astral_mask.whisper.12": "breathe",
   "nexuscore.relic.astral_mask.whisper.13": "open your eyes",
+  "death.attack.nexuscore.fell_through_world": "%1$s fell through a hole in the world",
   "death.attack.nexuscore.lost_in_astral": "%1$s got lost outside their own body",
   "nexuscore.relic.purity_amulet.tooltip": "As a charm: each drop drinks a harmful effect before it takes hold.",
   "nexuscore.relic.purity_amulet.drops": "Drops: %1$s/%2$s",

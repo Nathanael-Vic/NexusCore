@@ -240,7 +240,7 @@ public final class AstralClient {
      * cresce. A borda dos chunks nunca aparece. Vale para tudo (terreno, agua, ceu, nuvens e
      * criaturas), porque e a propria nevoa do jogo; ao sair do corpo, ela fecha devagar.
      *
-     * <p>Chamado no fim de {@code FogRenderer.setupFog} ({@code FogRendererAstralMixin}), depois de
+     * <p>Chamado no fim de {@code FogRenderer.setupFog} ({@code FogRendererMixin}), depois de
      * qualquer mod que mexa na nevoa, por isso le e escreve direto no {@link RenderSystem}.
      */
     public static void applyFog(float renderDistance, float partialTick) {

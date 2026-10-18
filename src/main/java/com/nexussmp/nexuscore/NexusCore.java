@@ -9,6 +9,8 @@ import com.nexussmp.nexuscore.core.config.CommonConfig;
 import com.nexussmp.nexuscore.core.config.ServerConfig;
 import com.nexussmp.nexuscore.core.module.ModuleManager;
 import com.nexussmp.nexuscore.core.registry.NexusRegistries;
+import com.nexussmp.nexuscore.monolith.MonolithModule;
+import com.nexussmp.nexuscore.monolith.MonolithRegistries;
 import com.nexussmp.nexuscore.core.registry.NexusSounds;
 import com.nexussmp.nexuscore.hologram.HologramModule;
 import com.nexussmp.nexuscore.magic.MagicModule;
@@ -44,6 +46,7 @@ public final class NexusCore {
         container.registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
 
         NexusRegistries.register(modBus);
+        MonolithRegistries.register(modBus);
         NexusSounds.register(modBus);
         NeoForge.EVENT_BUS.addListener(NexusCommands::register);
 
@@ -53,7 +56,8 @@ public final class NexusCore {
 
         ModuleManager.registerAll(List.of(new StatsModule(), new HologramModule(), new QuestModule(),
                 new BackroomsModule(), new RadioModule(), new VampireModule(), new MorphModule(),
-                new EnvelopeCompatModule(), new MagicModule(), new ParrotModule(), new RelicModule()), modBus, container);
+                new EnvelopeCompatModule(), new MagicModule(), new ParrotModule(), new RelicModule(),
+                new MonolithModule()), modBus, container);
     }
 
     public static ResourceLocation id(String path) {

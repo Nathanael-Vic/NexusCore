@@ -21,7 +21,8 @@
     "relic.PlayerAstralMixin",
     "relic.BlockStateAstralMixin",
     "relic.ServerPlayerAstralMixin",
-    "relic.ServerGamePacketListenerAstralMixin"
+    "relic.ServerGamePacketListenerAstralMixin",
+    "monolith.ChunkGeneratorStructureStateAccessor"
   ],
   "client": [
     "sodium.MinecraftClientMixin",
@@ -38,7 +39,8 @@
     "backrooms.CameraMixin",
     "options.OptionsHeaderMixin",
     "relic.LocalPlayerFallFlyingMixin",
-    "relic.FogRendererAstralMixin",
+    "fog.FogRendererMixin",
+    "monolith.LivingEntityRendererEchoMixin",
     "morph.EntityRendererAccessor",
     "morph.WalkAnimationStateAccessor",
     "quest.AbstractContainerScreenAccessor",
