@@ -174,16 +174,6 @@ tasks.jar {
     }
 }
 
-// Nexus Resources e um resource pack NORMAL, separado do jar: pode sobrescrever texturas de qualquer mod.
-// O build gera o zip pronto para distribuir em build/resourcepacks/.
-val packNexusResources by tasks.registering(Zip::class) {
-    group = "build"
-    description = "Empacota resourcepacks/Nexus Resources em um zip de resource pack."
-    from(layout.projectDirectory.dir("resourcepacks/Nexus Resources"))
-    archiveFileName = "Nexus Resources.zip"
-    destinationDirectory = layout.buildDirectory.dir("resourcepacks")
-}
-
 // Instalacao automatica (opcional): com nexuscore.installDir definido em ~/.gradle/gradle.properties,
 // todo build poe o jar novo nessa pasta mods, no lugar do antigo. Sem a propriedade, nao faz nada.
 val installDir = providers.gradleProperty("nexuscore.installDir").map { file(it) }
@@ -200,6 +190,5 @@ val installMod by tasks.registering(Copy::class) {
 }
 
 tasks.named("build") {
-    dependsOn(packNexusResources)
     finalizedBy(installMod)
 }

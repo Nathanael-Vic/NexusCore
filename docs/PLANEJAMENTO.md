@@ -18,7 +18,7 @@ Mod central do SMP: integrações com outros mods, configurações gerais, recur
 |---|---|
 | 0. Levantamento | feito: [`docs/FASE-0-levantamento.md`](FASE-0-levantamento.md) (faltam os prints de referência) |
 | 1. Migração + revisão | **código pronto, aguardando teste em jogo** |
-| 2. Nexus Resources | **pronto** (resource pack externo, ver [Fase 2](#fase-2-nexus-resources-resource-pack-externo)) |
+| 2. Nexus Resources | **pronto** (embutido no jar, ver [Fase 2](#fase-2-nexus-resources-resource-pack-embutido)) |
 | 2B. Interface do WaterFrames | **código pronto, aguardando teste em jogo** (desvios do plano em [Implementação](#implementação-o-que-mudou-em-relação-ao-plano)) |
 | 3. Estatísticas | **código pronto, aguardando teste em jogo** (ver [Implementação da Fase 3](#implementação-da-fase-3)) |
 | 4. Painel | **código pronto, aguardando teste em jogo** (ver [Implementação da Fase 4](#implementação-da-fase-4)) |
@@ -46,7 +46,7 @@ Relíquias (chave do refúgio, pena, coração, máscara, amuleto, pedra e bolsa
 ```
 
 - `build/libs/nexuscore-<versão>.jar` → pasta `mods` do modpack (substitui o jar do Xander's Sodium Options e o `vanillaframes`; os dois juntos aplicariam mixins duplicados). YACL e Yumi vão embutidos.
-- `build/resourcepacks/Nexus Resources.zip` → pasta `resourcepacks` do modpack (ou use a pasta `resourcepacks/Nexus Resources` direto).
+- O resource pack **Nexus Resources** vai dentro do jar, obrigatório e já ativado (ver Fase 2).
 
 ---
 
@@ -57,7 +57,7 @@ Relíquias (chave do refúgio, pena, coração, máscara, amuleto, pedra e bolsa
 3. [Preparação: modpack e ambiente (antes de codar)](#preparação-modpack-e-ambiente-antes-de-codar)
 4. [Fase 0: Levantamento do mod existente](#fase-0-levantamento-do-mod-existente)
 5. [Fase 1: Migração para NexusCore + revisão de código](#fase-1-migração-para-nexuscore--revisão-de-código)
-6. [Fase 2: Nexus Resources (resource pack externo)](#fase-2-nexus-resources-resource-pack-externo)
+6. [Fase 2: Nexus Resources (resource pack embutido)](#fase-2-nexus-resources-resource-pack-embutido)
 7. [Fase 2B: Interface do WaterFrames estilo Minecraft](#fase-2b-interface-do-waterframes-estilo-minecraft)
 8. [Fase 3: Estatísticas do servidor (backend)](#fase-3-estatísticas-do-servidor-backend)
 9. [Fase 4: Painel de exibição no mundo](#fase-4-painel-de-exibição-no-mundo)
@@ -77,7 +77,7 @@ Relíquias (chave do refúgio, pena, coração, máscara, amuleto, pedra e bolsa
 | `compat.options` | Devolve a tela de opções ao layout de fábrica: tira do cabeçalho os botões que outros mods penduram ali (o Sable pendura o "Sub-Level Settings", que estoura a altura fixa do cabeçalho e joga o título contra o topo da tela) | Cliente | nenhum |
 | `compat.cosmeticarmor` | Põe os botões do Cosmetic Armor no desenho do Curios: o quadrado preto de visibilidade vira o ícone do Curios na posição que ele usa (com a dica "Toggle Visibility"), e o peitoral que abre a tela fica dourado no hover, sem o nome escrito por cima ("CosmeticArmor" e "Normal") | Cliente | Cosmetic Armor Reworked |
 | `compat.waterframes` (textos) | Correções de texto da interface do WaterFrames ("SALVAR" → "Salvar", "emitir luz" → "luz", "Shader mode" → minúsculo) via `assets/waterframes/lang/pt_br.json` **dentro do jar**: o `neoforge.mods.toml` declara `ordering = "AFTER"` para o waterframes, então os recursos do NexusCore vencem os dele. Não depende do resource pack estar ligado | Cliente | WaterFrames |
-| *(fora do jar)* | Resource pack **Nexus Resources**, distribuído à parte no modpack: textura antiga de **madeira** do frame do WaterFrames (no lugar da azul) e futuros overrides de outros mods | Cliente | nenhum |
+| *(dentro do jar)* | Resource pack **Nexus Resources**, embutido e obrigatório: textura antiga de **madeira** do frame do WaterFrames (no lugar da azul) e futuros overrides de outros mods | Cliente | nenhum |
 | `stats` | Rastreia biomas e estruturas descobertos, salva no mundo, sincroniza com clientes | Servidor + cliente | nenhum |
 | `display` | Bloco "painel" que desenha as estatísticas na face do bloco, sem HUD e sem texto flutuante | Servidor + cliente | `stats` |
 | `vampire` | O Vampirism cercado: só **lordes** (nomeados por comando) sobem de nível e usam habilidades; quem é mordido por um lorde vira vampiro comum, que só queima no sol e precisa de sangue. Caçador não existe, e nada de vampiro/caçador nasce sozinho no mundo | Servidor + cliente | Vampirism (opcional; sem ele o módulo não faz nada) |
@@ -106,7 +106,7 @@ nexuscore/
 ├─ gradle.properties
 ├─ settings.gradle.kts
 ├─ docs/                                # levantamento da Fase 0
-├─ resourcepacks/Nexus Resources/       # resource pack EXTERNO (ver Fase 2); o build gera o zip
+├─ src/main/resources/resourcepacks/nexus_resources/  # resource pack embutido e obrigatório (ver Fase 2)
 ├─ tools/sprites/                       # gerador dos sprites da interface do WaterFrames
 ├─ src/stubs/java/net/fabricmc/api/     # so para o javac: cala o aviso do @Environment (nao vai no jar)
 └─ src/main/
@@ -686,27 +686,27 @@ Implementação:
 
 ---
 
-## Fase 2: Nexus Resources (resource pack externo)
+## Fase 2: Nexus Resources (resource pack embutido)
 
 ### Nome
 
 **Nexus Resources**. Simples, diz o que é e não amarra o pack ao frame, já que ele vai receber mais texturas.
 
-### Decisão: pack normal, fora do jar
+### Decisão: embutido no jar, obrigatório
 
-O plano original embutia o pack no mod (`AddPackFindersEvent`). **Mudou:** o Nexus Resources é um **resource pack comum**, distribuído na pasta `resourcepacks` do modpack. Motivo: ele vai sobrescrever texturas de **outros mods** também, então precisa existir e ser editável independente do NexusCore.
+Por um tempo o Nexus Resources foi um resource pack comum, na pasta `resourcepacks` do modpack. **Desde a 0.1.3 ele vai dentro do jar** (`AddPackFindersEvent`, em `core/client/NexusResources.java`): fica no topo da lista, já vem ativado e não dá para tirar. Ninguém precisa instalar nada à parte, e ninguém tira a textura.
 
 Divisão das texturas:
 
 | Onde | O quê |
 |---|---|
 | **jar do NexusCore** (`src/main/resources/assets/nexuscore/`) | arte própria do mod: sprites da interface do WaterFrames (Fase 2B) e, depois, o bloco do painel (Fase 4). O mod funciona completo sem o pack |
-| **Nexus Resources** (`resourcepacks/Nexus Resources/`) | overrides de texturas de outros mods (hoje: WaterFrames). Também pode sobrescrever sprites do `nexuscore`, para ajustar o visual sem recompilar |
+| **Nexus Resources** (`src/main/resources/resourcepacks/nexus_resources/`) | overrides de texturas de outros mods (hoje: WaterFrames). Também pode sobrescrever sprites do `nexuscore` |
 
 ### Estrutura
 
 ```
-resourcepacks/Nexus Resources/
+src/main/resources/resourcepacks/nexus_resources/
 ├─ pack.mcmeta
 ├─ pack.png                                 # face do frame antigo, ampliada
 └─ assets/
@@ -732,9 +732,7 @@ resourcepacks/Nexus Resources/
 
 ### Distribuição
 
-- `.\gradlew.bat build` gera `build/resourcepacks/Nexus Resources.zip` (task `packNexusResources`).
-- No modpack: colocar o zip (ou a pasta) em `resourcepacks/` e ativar na tela de Resource Packs.
-- Para vir ativo por padrão: incluir `"file/Nexus Resources.zip"` na lista `resourcePacks` do `options.txt` padrão do modpack.
+- Vai dentro do jar: nada para instalar nem ativar. Na tela de pacotes ele aparece em Selecionados, no topo, travado.
 
 ### Regra para futuras texturas
 
@@ -1369,7 +1367,7 @@ Pensadas para um servidor de **pioneiros explorando uma dimensão nova**. São s
 - Rastreamento limitado a um quadrado a partir de `0, 0` (raio padrão 5000, configurável; 0 = sem limite).
 - (1) Pacote Java: `com.nexussmp.nexuscore`.
 - (2) Dimensão rastreada por padrão: **só `minecraft:overworld`** (lista editável na config do servidor).
-- (3) Nexus Resources é um **resource pack normal, fora do jar**, ativo por padrão no modpack. Sem `AddPackFindersEvent`.
+- (3) Nexus Resources começou como **resource pack normal, fora do jar**. Na 0.1.3 passou para dentro do jar, obrigatório (`AddPackFindersEvent`).
 - (10) Ícones do WaterFrames: dessaturação em tempo real (opção A).
 - Texturas: arte própria do mod fica no jar (`assets/nexuscore`); overrides de outros mods ficam no Nexus Resources.
 - Entrega: Fases 1, 2 e 2B primeiro, teste em jogo, depois Fases 3 e 4. Fase 5 é só ideia.

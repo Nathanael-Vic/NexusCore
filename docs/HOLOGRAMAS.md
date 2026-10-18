@@ -108,7 +108,7 @@ Uma entidade, um modelo, um shader barato. A gravação inteira fica em memória
 `/nexus holograma gravar cancelar` joga fora. Sair do servidor no meio salva o que deu tempo. No limite de tempo (`maxRecordingSeconds`, padrão 10 min) ela se salva sozinha.
 
 ### Áudio
-1. Coloque o `.ogg` no pack **Nexus Resources**, em `assets/nexuscore/sounds/speech/president_intro.ogg`.
+1. Coloque o `.ogg` no pack **Nexus Resources** (embutido no mod, em `src/main/resources/resourcepacks/nexus_resources/`), em `assets/nexuscore/sounds/speech/president_intro.ogg`.
    O jogo só lê **OGG Vorbis** — não lê mp3, wav nem OGG **Opus** (áudio de WhatsApp é Opus, e o arquivo
    também termina em `.ogg`, então dá para se enganar fácil). Arraste o arquivo para cima de
    `tools/audio/converter-ogg.cmd` que ele sai Vorbis mono, pronto. Mono importa: é o que faz o som

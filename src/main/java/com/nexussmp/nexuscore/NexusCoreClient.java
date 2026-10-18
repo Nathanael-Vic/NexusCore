@@ -6,6 +6,7 @@ import com.nexussmp.nexuscore.compat.envelope.client.EnvelopeClientModule;
 import com.nexussmp.nexuscore.compat.options.OptionsCompatModule;
 import com.nexussmp.nexuscore.compat.sodium.SodiumCompatModule;
 import com.nexussmp.nexuscore.compat.waterframes.WaterFramesCompatModule;
+import com.nexussmp.nexuscore.core.client.NexusResources;
 import com.nexussmp.nexuscore.core.client.PlayerSkins;
 import com.nexussmp.nexuscore.core.client.menu.MainMenu;
 import com.nexussmp.nexuscore.core.config.ClientConfig;
@@ -28,6 +29,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddPackFindersEvent;
 
 import java.util.List;
 
@@ -44,6 +46,8 @@ public final class NexusCoreClient {
                 event -> PlayerSkins.clear());
         // O menu principal do NexusSMP no lugar da tela de titulo (desliga em nexuscore-client.toml).
         NeoForge.EVENT_BUS.addListener(ScreenEvent.Opening.class, MainMenu::onOpening);
+        // O resource pack do SMP, embutido e obrigatorio.
+        modBus.addListener(AddPackFindersEvent.class, NexusResources::onAddPackFinders);
         ModuleManager.registerAll(List.of(
                 new SodiumCompatModule(),
                 new WaterFramesCompatModule(),
