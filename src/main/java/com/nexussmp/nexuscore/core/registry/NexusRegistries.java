@@ -1,5 +1,6 @@
 package com.nexussmp.nexuscore.core.registry;
 
+import com.nexussmp.nexuscore.morph.orion.OrionEntity;
 import com.nexussmp.nexuscore.NexusCore;
 import com.nexussmp.nexuscore.backrooms.block.BackroomsLampBlock;
 import com.nexussmp.nexuscore.backrooms.entity.SkinwalkerEntity;
@@ -215,6 +216,19 @@ public final class NexusRegistries {
                     .clientTrackingRange(8)
                     .build("shoulder_parrot"));
 
+    /**
+     * O ORION H-01: so existe como forma, posta por comando ({@code /nexus orion virar}). Nunca
+     * aparece sozinho, nao e salvo e nao tem ovo nem /summon.
+     */
+    public static final DeferredHolder<EntityType<?>, EntityType<OrionEntity>> ORION =
+            ENTITY_TYPES.register("orion", () -> EntityType.Builder.<OrionEntity>of(OrionEntity::new, MobCategory.MISC)
+                    .sized(0.45F, 0.8F)
+                    .noSummon()
+                    .noSave()
+                    .fireImmune()
+                    .clientTrackingRange(8)
+                    .build("orion"));
+
     /** A forma guardada no anel da metamorfose. Vai para o disco e para a rede junto com o item. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<MorphForm>> MORPH_FORM =
             DATA_COMPONENTS.registerComponentType("morph_form",
@@ -341,6 +355,7 @@ public final class NexusRegistries {
             event.put(SKINWALKER.get(), SkinwalkerEntity.createAttributes().build());
             event.put(SHOULDER_PARROT.get(), ShoulderParrot.createAttributes().build());
             event.put(ASTRAL_BODY.get(), AstralBody.createAttributes().build());
+            event.put(ORION.get(), OrionEntity.createAttributes().build());
         });
     }
 

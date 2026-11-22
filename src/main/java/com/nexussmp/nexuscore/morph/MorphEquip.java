@@ -3,6 +3,7 @@ package com.nexussmp.nexuscore.morph;
 import com.nexussmp.nexuscore.core.config.CommonConfig;
 import com.nexussmp.nexuscore.core.module.ModuleIds;
 import com.nexussmp.nexuscore.core.registry.NexusRegistries;
+import com.nexussmp.nexuscore.morph.orion.OrionMorph;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -41,7 +42,9 @@ final class MorphEquip {
             return;
         }
         MorphAbilities.tick(player);
-        MorphForm worn = CommonConfig.isModuleEnabled(ModuleIds.MORPH) ? wornForm(player) : null;
+        // Quem um operador virou ORION fica ORION, com ou sem anel, ate desvirar pelo comando.
+        MorphForm worn = !CommonConfig.isModuleEnabled(ModuleIds.MORPH) ? null
+                : OrionMorph.forced(player) ? OrionMorph.FORM : wornForm(player);
         MorphForm current = MorphState.form(player);
         if (Objects.equals(worn, current)) {
             return;

@@ -4,7 +4,10 @@ import com.nexussmp.nexuscore.core.module.ModuleIds;
 import com.nexussmp.nexuscore.core.module.NexusModule;
 import com.nexussmp.nexuscore.core.util.ModRequirement;
 import com.nexussmp.nexuscore.morph.client.MorphClient;
+import com.nexussmp.nexuscore.morph.orion.OrionMorph;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.event.ServerChatEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
@@ -67,6 +70,12 @@ public final class MorphModule implements NexusModule {
         game.addListener(PlayerEvent.PlayerRespawnEvent.class, MorphEquip::onRecreated);
         game.addListener(PlayerEvent.PlayerChangedDimensionEvent.class, MorphEquip::onRecreated);
         game.addListener(PlayerEvent.PlayerLoggedOutEvent.class, MorphEquip::onLoggedOut);
-        game.addListener(ServerStoppedEvent.class, event -> MorphEquip.clear());
+        game.addListener(ServerStoppedEvent.class, event -> {
+            MorphEquip.clear();
+            OrionMorph.clear();
+        });
+        game.addListener(ServerChatEvent.class, OrionMorph::onChat);
+        game.addListener(ServerTickEvent.Post.class, event -> OrionMorph.onServerTick(event.getServer()));
+        game.addListener(PlayerEvent.PlayerLoggedOutEvent.class, event -> OrionMorph.forget(event.getEntity().getUUID()));
     }
 }

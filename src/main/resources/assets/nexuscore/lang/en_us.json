@@ -449,5 +449,7 @@
   "nexuscore.menu.status.online": "Online · %1$s/%2$s players · %3$s ms",
   "nexuscore.menu.status.online_simple": "Online",
   "nexuscore.menu.status.incompatible": "Server on a different version",
-  "nexuscore.menu.status.offline": "Server offline"
+  "nexuscore.menu.status.offline": "Server offline",
+  "entity.nexuscore.orion": "ORION H-01",
+  "nexuscore.morph.orion.no_voice": "ORION has no voice: talk in the chat (it beeps)"
 }

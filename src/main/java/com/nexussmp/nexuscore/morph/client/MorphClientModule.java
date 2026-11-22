@@ -3,7 +3,11 @@ package com.nexussmp.nexuscore.morph.client;
 import com.nexussmp.nexuscore.core.module.ModuleIds;
 import com.nexussmp.nexuscore.core.module.NexusModule;
 import com.nexussmp.nexuscore.core.util.ModRequirement;
+import com.nexussmp.nexuscore.core.registry.NexusRegistries;
 import net.neoforged.bus.api.IEventBus;
+import com.nexussmp.nexuscore.morph.orion.OrionMorph;
+import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
@@ -42,5 +46,9 @@ public final class MorphClientModule implements NexusModule {
         game.addListener(RenderNameTagEvent.class, MorphRenderer::onNameTag);
         game.addListener(EntityJoinLevelEvent.class, MorphRenderer::onJoinLevel);
         game.addListener(ClientPlayerNetworkEvent.LoggingOut.class, event -> MorphClient.clear());
+        game.addListener(ComputeFovModifierEvent.class, event ->
+                event.setNewFovModifier(OrionMorph.correctFov(event.getPlayer(), event.getNewFovModifier())));
+        modBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event ->
+                event.registerEntityRenderer(NexusRegistries.ORION.get(), OrionRenderer::new));
     }
 }
